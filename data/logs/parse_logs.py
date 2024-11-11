@@ -20,7 +20,7 @@ def process_directory(input_directory, output_directory, field):
     for filename in os.listdir(input_directory):
         if filename.endswith(".txt"):
             input_file = os.path.join(input_directory, filename)
-            output_file = os.path.join(output_directory, f"{field}_{filename}.txt")
+            output_file = os.path.join(output_directory, f"{field}_{filename}")
             print(f"Processing {filename}...")
             extract_field(input_file, output_file, field)
             print(f"Saved {field} readings to {output_file}")
