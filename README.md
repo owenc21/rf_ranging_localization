@@ -1,7 +1,5 @@
 # RF-Based Ranging for Relative Localization
 
-## "Walking Skeleton"
-
 - To begin, we have initialized our repository to contain all of the necessary documents and API references needed for development
   - An API reference can be found in `/Doc/DW3xxx_Driver_API_Guide_6.0.14.pdf`
   - A guide for using the software development kit (SDK) can be found in `/Doc/DWM3001CDK_SDK_Developer_Guide_0.1.1.pdf`
@@ -22,9 +20,14 @@
 
 ## Connectivity Matrix
 
-- We do not offer firmware that can build a connectivity matrix natively on the devices (see the Connectivity List firmware repository, as linked above, for more information)
-- However, in `src/distance_matrix_sim.c`, we offer a very simple simulation program that demonstrates how a connectivity matrix might be built
-- We encourage future work to combine the ideas of our simulation program and the firmware we've developed to produce a connectivity list. We believe this approach is going to be the most effective
+- In `src/distance_matrix_sim.c`, we offer a very simple simulation program that demonstrates how a connectivity matrix might be built
+
+- In the same repository as linked above ([DWM3001CDK-rf-ranging](https://github.com/owenc21/DWM3001CDK-rf-ranging)), we also include a firmware module to build a distributed connectivity matrix
+- This was the culmination of the semester's effort. It makes use of the connectivity list firmware as described above
+- Currently there are some issues with the firmware
+  - The devices have a strict 127 byte transmission limit, meaning a distributed data structure (like a distance/connectivity matrix) must be small. As such, the firmware currently only works for $\leq 2$ devices. However, the firmware is *correct* for an arbitrary number of devices, the devices themselves will just refuse to transmit the matrix when it has more than 2 devices
+  - No error checking/correction is done, leading to inaccurate/inappropriate distance measurements (such as negative values)
+- Future groups/contributors are encouraged to tackle these issues and make the firmware more efficient and robust
 
 ## Data Analysis
 
